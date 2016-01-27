@@ -9,3 +9,13 @@ CREATE OR REPLACE FUNCTION faker_first_name() RETURNS varchar AS $$
         RETURN first_name;
     END;
 $$ LANGUAGE plpgsql;
+
+-- grabs a random last name from faker.last_names
+CREATE OR REPLACE FUNCTION faker_last_name() RETURNS varchar AS $$
+    DECLARE
+        last_name varchar;
+    BEGIN
+        select * into last_name from faker.last_names order by random() limit 1;
+        RETURN last_name;
+    END;
+$$ LANGUAGE plpgsql;
