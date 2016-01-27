@@ -1,6 +1,6 @@
 -- functions
 
--- grabs a rando first name from faker.first_names
+-- grabs a random first name from faker.first_names
 CREATE OR REPLACE FUNCTION faker_first_name() RETURNS varchar AS $$
     DECLARE
         first_name varchar;
