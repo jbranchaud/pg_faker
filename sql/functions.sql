@@ -43,3 +43,13 @@ CREATE OR REPLACE FUNCTION faker_username() RETURNS varchar AS $$
         RETURN lower(first_name) || '_' || lower(last_name) || ceil(random() * 100)::text;
     END;
 $$ LANGUAGE plpgsql;
+
+-- creates a random email address
+CREATE OR REPLACE FUNCTION faker_email() RETURNS varchar AS $$
+    DECLARE
+        host varchar;
+    BEGIN
+        select * into host from (select (Array['gmail.com','yahoo.com','hotmail.com','example.com']::text[])[ceil(random()*4)]) as hosts;
+        RETURN faker_username() || '@' || host;
+    END;
+$$ LANGUAGE plpgsql;
