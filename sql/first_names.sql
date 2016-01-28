@@ -1,7 +1,7 @@
 -- first_names table
 
 create schema if not exists faker;
-create table faker.first_names (
+create table if not exists faker.first_names (
     first_name varchar primary key
 );
 
@@ -3013,4 +3013,5 @@ insert into faker.first_names (first_name) values
     ('Zoila'),
     ('Zola'),
     ('Zora'),
-    ('Zula');
+    ('Zula')
+on conflict do nothing;
