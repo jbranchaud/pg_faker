@@ -480,4 +480,4 @@ insert into faker.last_names (last_name) values
     ('Zemlak'),
     ('Ziemann'),
     ('Zieme'),
-    ('Zulauf')
+    ('Zulauf');
