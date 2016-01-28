@@ -19,3 +19,15 @@ CREATE OR REPLACE FUNCTION faker_last_name() RETURNS varchar AS $$
         RETURN last_name;
     END;
 $$ LANGUAGE plpgsql;
+
+-- creates a random name from a first and last name
+CREATE OR REPLACE FUNCTION faker_full_name() RETURNS varchar AS $$
+    DECLARE
+        first_name varchar;
+        last_name varchar;
+    BEGIN
+        select * into first_name from faker.first_names order by random() limit 1;
+        select * into last_name from faker.last_names order by random() limit 1;
+        RETURN first_name || ' ' || last_name;
+    END;
+$$ LANGUAGE plpgsql;
