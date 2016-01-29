@@ -54,6 +54,16 @@ CREATE OR REPLACE FUNCTION faker_email() RETURNS varchar AS $$
     END;
 $$ LANGUAGE plpgsql;
 
+-- creates a random valid area code
+CREATE OR REPLACE FUNCTION faker_area_code() RETURNS varchar AS $$
+    DECLARE
+        area_code varchar;
+    BEGIN
+        select * into area_code from (select floor((random() * (999 - 201)) + 201)::varchar) as a;
+        RETURN area_code;
+    END;
+$$ LANGUAGE plpgsql;
+
 -- creates a random phone number
 CREATE OR REPLACE FUNCTION faker_phone_number() RETURNS varchar AS $$
     DECLARE
@@ -61,9 +71,8 @@ CREATE OR REPLACE FUNCTION faker_phone_number() RETURNS varchar AS $$
         first_three varchar;
         last_four varchar;
     BEGIN
-        select * into area_code from (select floor((random() * 3 + 1) * 100)::varchar) as a;
         select * into first_three from (select floor((random() * 3 + 1) * 100)::varchar) as b;
         select * into last_four from (select floor((random() * 4 + 1) * 1000)::varchar) as c;
-        RETURN area_code || '-' || first_three || '-' || last_four;
+        RETURN faker_area_code() || '-' || first_three || '-' || last_four;
     END;
 $$ LANGUAGE plpgsql;
